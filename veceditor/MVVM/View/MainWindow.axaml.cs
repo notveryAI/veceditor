@@ -216,6 +216,93 @@ namespace veceditor
          }
       }
 
+<<<<<<< HEAD
+=======
+      private async void OnSaveStateClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+      {
+         if (_canvas == null) return;
+
+         var saveFileDialog = new SaveFileDialog
+         {
+            Title = "Save State",
+            Filters = new List<FileDialogFilter>
+            {
+               new FileDialogFilter { Name = "JSON Files", Extensions = new List<string> { "json" } }
+            },
+            DefaultExtension = "json"
+         };
+
+         var filePath = await saveFileDialog.ShowAsync(this);
+         if (string.IsNullOrEmpty(filePath))
+            return;
+
+         await viewModel.SaveState(filePath);
+      }
+
+      private async void OnLoadStateClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+      {
+         if (_canvas == null) return;
+
+         var openFileDialog = new OpenFileDialog
+         {
+            Title = "Load State",
+            Filters = new List<FileDialogFilter>
+            {
+               new FileDialogFilter { Name = "JSON Files", Extensions = new List<string> { "json" } }
+            }
+         };
+
+         var filePaths = await openFileDialog.ShowAsync(this);
+         if (filePaths == null || filePaths.Length == 0)
+            return;
+
+         await viewModel.LoadState(filePaths[0]);
+      }
+
+      private async void OnSaveSvgClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+      {
+         if (_canvas == null) return;
+
+         var saveFileDialog = new SaveFileDialog
+         {
+            Title = "Сохранить как SVG",
+            Filters = new List<FileDialogFilter>
+            {
+               new FileDialogFilter { Name = "SVG Files", Extensions = new List<string> { "svg" } }
+            },
+            DefaultExtension = "svg"
+         };
+
+         var filePath = await saveFileDialog.ShowAsync(this);
+         if (string.IsNullOrEmpty(filePath))
+            return;
+
+         // Временно скрываем TextBlock с текущим режимом рисования
+         bool selTextWasVisible = SelText.IsVisible;
+         SelText.IsVisible = false;
+
+         try
+         {
+            var success = await SvgExporter.ExportToSvg(_canvas, filePath);
+            if (success)
+            {
+               // Сообщение об успехе
+               Console.WriteLine("SVG сохранен успешно!");
+            }
+            else
+            {
+               // Сообщение об ошибке
+               Console.WriteLine("Не удалось сохранить SVG.");
+            }
+         }
+         finally
+         {
+            // Восстанавливаем видимость
+            SelText.IsVisible = selTextWasVisible;
+         }
+      }
+
+>>>>>>> 655f8f9 (SVG saver)
       public void ChangeColor(Shape shape, Brush newColor)
       {
          if (shape is Ellipse ellipse)

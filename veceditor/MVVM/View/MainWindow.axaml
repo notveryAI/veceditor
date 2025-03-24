@@ -32,6 +32,7 @@
 				<ComboBox Width="120"
                     SelectedItem="{Binding _SelectedFigure}"
                     ItemsSource="{Binding FigureTypes}">
+<<<<<<< HEAD
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal">
@@ -49,6 +50,31 @@
 				<Button x:Name="SavePngButton" Content="Save as PNG" Click="OnSavePngClick" />
 			</StackPanel>
 		</Grid>
+=======
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="avares://veceditor/Icons/icon.png" Width="20" Height="20"/>
+                                <TextBlock Text="{Binding}" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <!-- Save PNG Button -->
+                <Button x:Name="SavePngButton" Content="Save as PNG" Click="OnSavePngClick" />
+                
+                <!-- Save SVG Button -->
+                <Button x:Name="SaveSvgButton" Content="Save as SVG" Click="OnSaveSvgClick" />
+                
+                <!-- Save State Button -->
+                <Button x:Name="SaveStateButton" Content="Save State" Click="OnSaveStateClick" />
+                
+                <!-- Load State Button -->
+                <Button x:Name="LoadStateButton" Content="Load State" Click="OnLoadStateClick" />
+            </StackPanel>
+        </Grid>
+>>>>>>> 655f8f9 (SVG saver)
 
 		<!-- Холст для рисования -->
 		<Canvas x:Name="DrawingCanvas" Background="White" Grid.Row="1" Grid.Column="0"/>
